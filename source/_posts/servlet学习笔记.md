@@ -25,17 +25,17 @@ Servlet有几个方法，实现了初始化，服务，销毁的功能。
 * destory()方法，destory方法只会调用一次，生命周期结束时调用，什么时候结束由web容器决定，或者关闭服务器时自然结束。
 #### 生命周期示例
 启动服务器，访问页面后，看控制台信息。
-![控制台信息](./pictures/con1.png)
+![控制台信息](/images/con1.png)
 点击页面
 
-![form](./pictures/form1.png)
+![form](/images/form1.png)
 
 控制台信息，可以看出先后进行了执行了init(),service(),doPost().
-![con2](./pictures/con2.png)
+![con2](/images/con2.png)
 
 即如下顺序
-![coode](./pictures/code2.png)
+![coode](/images/code2.png)
 再一起发起提交，并没有第二次初始化，初始化仅进行一次。
-![con3](./pictures/con3.png)
+![con3](/images/con3.png)
 
     其中，service()方法由我们重写了，所以要在service中调用一下父类，否则不会调用doPost等，因为自动分配调用是由tomcat自带的service中的代码实现的。
