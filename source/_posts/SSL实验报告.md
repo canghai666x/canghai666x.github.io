@@ -49,49 +49,49 @@ if(isset($myemail))
 ### 通过服务器访问
 将代码放入服务器，并访问。我的是阿里云服务器，apache+php。
 访问效果如图:
-![](../images/0063dFB6gy1fxuzbh9e1wj30ox0d93z6.jpg)
+![](/images/0063dFB6gy1fxuzbh9e1wj30ox0d93z6.jpg)
 响应如图：
-![](../images/0063dFB6gy1fxuzc7dpdwj30gn07uaag.jpg)
+![](/images/0063dFB6gy1fxuzc7dpdwj30gn07uaag.jpg)
 ### 使用wireshark抓包
 通过ipconfig查询到本机ip:192.168.31.164
 服务器ip为:47.107.174.125
 配置wireshark过滤规则:
-![](../images/0063dFB6gy1fxv031rjnpj30eh00z741.jpg)
+![](/images/0063dFB6gy1fxv031rjnpj30eh00z741.jpg)
 服务器向本机发送的网页:
-![](../images/0063dFB6gy1fxv021fjhij31cf0obtb5.jpg)
+![](/images/0063dFB6gy1fxv021fjhij31cf0obtb5.jpg)
 可以看出是明文发送
 通过表单提交的账号信息：
-![](../images/0063dFB6gy1fxv05mj69zj317h0jdabs.jpg)
+![](/images/0063dFB6gy1fxv05mj69zj317h0jdabs.jpg)
 显然是明文传输，很容易就被抓包获取。
 ### 在服务器配置SSL
 - 安装mod_ssl openssl
 `yum install mod_ssl openssl`
 - 生成私钥
-![](../images/20181205151113.png)
+![](/images/20181205151113.png)
 - 生成证书签名请求
-![](../images/20181205151311.png)
+![](/images/20181205151311.png)
 - 生成自签名证书
-![](../images/20181205151436.png)
+![](/images/20181205151436.png)
 - 创建文件夹，用来存放私钥和证书
-![](../images/20181205152524.png)
+![](/images/20181205152524.png)
 - 将证书和私钥转移到ssl文件夹相应位置
-![](../images/20181205152533.png)
+![](/images/20181205152533.png)
 - 更新Apache ssl配置文件
 路径为/etc/httpd/conf.d/ssl.conf
-![](../images/20181205154702.png)
+![](/images/20181205154702.png)
 - 重启apache服务
-![](../images/20181205153540.png)
+![](/images/20181205153540.png)
 重启后ssl在全站起用
 ### 配置ssl后测试
 - 使用chrome登录测试网页
-![](../images/20181205153514.png)
+![](/images/20181205153514.png)
 浏览器显示不安全，因为是自签发的证书，没有经过CA机构签发，继续访问就是了。
 - 输入数据进行发送测试
-![](../images/20181205154040.png)
+![](/images/20181205154040.png)
 - 服务器响应
-![](../images/20181205154026.png)
+![](/images/20181205154026.png)
 - 使用wireshark抓包
-![](../images/20181205154016.png)
+![](/images/20181205154016.png)
 可以看出发送数据的数据包协议为TLSv1.2,就是ssl。
 下面的数据内容是加密后的，无法看到明文。
 ### 实验心得
