@@ -46,6 +46,7 @@ tags: SQL
 > psql 
 > create user canghai with password '******';
 创建一个测试数据库并授予全部权限给canghai这个用户
+> create database test ower canghai;
 > grant all privileges on database test to canghai;
 切换为Linux用户，并且登录到psql中
 ![使用新用户登录](/images/psql9.png)
