@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="OS," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="操作系统引论操作系统的作用和目标操作系统的目标 方便性：没有操作系统的计算机是很难使用的，通过操作系统提供的命令操作计算机系统，方便用户。 有效性：提高设备资源利用率，提高系统吞吐量。 可扩充性：从早期的无结构化发展成模块化，层次化，近年来采用微内核化，方便增加新的功能和模块。 开放性：解决计算机系统的硬件软件的兼容问题。操作系统的作用 作为用户与计算机硬件系统间的接口，用户通过操作系统来使用计算">
+<meta name="keywords" content="OS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="操作系统笔记">
+<meta property="og:url" content="http://canghai666x.github.io/2018/09/10/OS1/index.html">
+<meta property="og:site_name" content="CangHai&#39;s Blog">
+<meta property="og:description" content="操作系统引论操作系统的作用和目标操作系统的目标 方便性：没有操作系统的计算机是很难使用的，通过操作系统提供的命令操作计算机系统，方便用户。 有效性：提高设备资源利用率，提高系统吞吐量。 可扩充性：从早期的无结构化发展成模块化，层次化，近年来采用微内核化，方便增加新的功能和模块。 开放性：解决计算机系统的硬件软件的兼容问题。操作系统的作用 作为用户与计算机硬件系统间的接口，用户通过操作系统来使用计算">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-09-23T02:42:06.727Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="操作系统笔记">
+<meta name="twitter:description" content="操作系统引论操作系统的作用和目标操作系统的目标 方便性：没有操作系统的计算机是很难使用的，通过操作系统提供的命令操作计算机系统，方便用户。 有效性：提高设备资源利用率，提高系统吞吐量。 可扩充性：从早期的无结构化发展成模块化，层次化，近年来采用微内核化，方便增加新的功能和模块。 开放性：解决计算机系统的硬件软件的兼容问题。操作系统的作用 作为用户与计算机硬件系统间的接口，用户通过操作系统来使用计算">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://canghai666x.github.io/2018/09/10/OS1/"/>
+
+
+
+
+
+  <title>操作系统笔记 | CangHai's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">CangHai's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">沧海的个人博客</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            Commonweal 404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://canghai666x.github.io/2018/09/10/OS1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CangHai">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CangHai's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">操作系统笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-10T20:25:36+08:00">
+                2018-09-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="操作系统引论"><a href="#操作系统引论" class="headerlink" title="操作系统引论"></a>操作系统引论</h1><h2 id="操作系统的作用和目标"><a href="#操作系统的作用和目标" class="headerlink" title="操作系统的作用和目标"></a>操作系统的作用和目标</h2><h3 id="操作系统的目标"><a href="#操作系统的目标" class="headerlink" title="操作系统的目标"></a>操作系统的目标</h3><ol>
+<li>方便性：没有操作系统的计算机是很难使用的，通过操作系统提供的命令操作计算机系统，方便用户。</li>
+<li>有效性：提高设备资源利用率，提高系统吞吐量。</li>
+<li>可扩充性：从早期的无结构化发展成模块化，层次化，近年来采用微内核化，方便增加新的功能和模块。</li>
+<li>开放性：解决计算机系统的硬件软件的兼容问题。<h3 id="操作系统的作用"><a href="#操作系统的作用" class="headerlink" title="操作系统的作用"></a>操作系统的作用</h3></li>
+<li>作为用户与计算机硬件系统间的接口，用户通过操作系统来使用计算机系统。</li>
+<li>作为计算机系统资源的管理者，处理机管理，存储器管理，IO设备管理，文件管理。</li>
+<li>实现了对计算机资源的抽象，IO抽象隐藏硬件，文件抽象覆盖IO，窗口软件覆盖文件操作，OS是铺设在计算机硬件上的多层软件的集合，他们不仅增强了系统的功能，还隐藏了对操作系统的具体细节。<h3 id="推动操作系统发展的动力"><a href="#推动操作系统发展的动力" class="headerlink" title="推动操作系统发展的动力"></a>推动操作系统发展的动力</h3></li>
+<li>提高计算机资源利用率</li>
+<li>方便用户</li>
+<li>器件的更新换代</li>
+<li>计算机体系结构的不断发展，例如从单处理机发展为多处理机时。</li>
+<li>不断提出新的应用需求，音乐媒体等。<h2 id="操作系统的发展过程"><a href="#操作系统的发展过程" class="headerlink" title="操作系统的发展过程"></a>操作系统的发展过程</h2><h3 id="未配置操作系统的计算机系统"><a href="#未配置操作系统的计算机系统" class="headerlink" title="未配置操作系统的计算机系统"></a>未配置操作系统的计算机系统</h3></li>
+<li>人工操作方式</li>
+<li>脱机输入输出<h3 id="单批道处理系统"><a href="#单批道处理系统" class="headerlink" title="单批道处理系统"></a>单批道处理系统</h3></li>
+<li>处理过程：把一批作业以脱机方式输入到磁带，配置监督程序，顺序执行。</li>
+<li>缺点：资源得不到充分利用，CPU利用率低。<h3 id="多批道处理系统"><a href="#多批道处理系统" class="headerlink" title="多批道处理系统"></a>多批道处理系统</h3> IBM360 OS/360</li>
+<li>概念：作业先存放在外存，形成后备队列，按一定算法，选出若干个调入内存，共享CPU和系统资源。A进行IO时，B进行CPU运算，交替进行。</li>
+<li>优缺点：优-资源利用率高，吞吐量大；缺-平均周转期长，依次排队处理，耗时久，无交互能力，从开始到完成，用户不能交互。</li>
+<li>需要解决的问题： 1)处理机争用问题，2)内存分配和保护问题，3)IO设备管理问题，4)文件组织和管理问题，5)作业管理问题，6)用户与系统的接口问题。</li>
+</ol>
+<p><strong>操作系统是一组能有效地组织和管理计算机硬件和软件资源，合理地对各类作业进行调度，以及方便用户使用程序的集合</strong></p>
+<h3 id="分时系统"><a href="#分时系统" class="headerlink" title="分时系统"></a>分时系统</h3><ol>
+<li>引入：解决人机交互问题，希望独占式共享主机。</li>
+<li>关键问题：1)及时接收，配置多路卡，及时接收多个用户键入的命令和数据。分时多路复用，很快地扫描各个终端接收数据。2）及时处理，1作业直接进入内存，2采用轮转运行方式。</li>
+<li>特征：多路性、独立性、及时性、交互性。<h3 id="实时系统"><a href="#实时系统" class="headerlink" title="实时系统"></a>实时系统</h3></li>
+<li>常见类型：工业（武器）控制系统，信息查询系统，多媒体系统，嵌入式系统。</li>
+<li>实时任务类型： (1) 周期性任务，非周期性任务：开始截止时间和完成截止时间，有时间要求。 （2）硬时性任务和软时性任务、<h3 id="微机操作系统的发展"><a href="#微机操作系统的发展" class="headerlink" title="微机操作系统的发展"></a>微机操作系统的发展</h3></li>
+<li>单用户单任务</li>
+<li>单用户多任务</li>
+<li>多用户多任务<h2 id="基本特征"><a href="#基本特征" class="headerlink" title="基本特征"></a>基本特征</h2><h3 id="并发"><a href="#并发" class="headerlink" title="并发"></a>并发</h3></li>
+<li>并行和并发：并行指多个事件同一时刻发生，并发指多个事件在很短时间内发生。</li>
+<li>引入进程：指在系统中能独立运行并作为系统分配资源的基本单位，它是由一组机器指令、数据和堆栈组成，是一个独立运行的活动实体。多个进程间可并发执行和交换信息。<h3 id="共享"><a href="#共享" class="headerlink" title="共享"></a>共享</h3></li>
+<li>互斥共享方式，如打印机。</li>
+<li>同时访问方式，如磁盘。<h3 id="虚拟"><a href="#虚拟" class="headerlink" title="虚拟"></a>虚拟</h3></li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/OS/" rel="tag"># OS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/08/servlet学习笔记/" rel="next" title="servlet学习笔记">
+                <i class="fa fa-chevron-left"></i> servlet学习笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/09/12/搜索问题/" rel="prev" title="搜索问题">
+                搜索问题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">CangHai</p>
+              <p class="site-description motion-element" itemprop="description">沧海的个人博客，记载我的学习经验</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#操作系统引论"><span class="nav-number">1.</span> <span class="nav-text">操作系统引论</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#操作系统的作用和目标"><span class="nav-number">1.1.</span> <span class="nav-text">操作系统的作用和目标</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#操作系统的目标"><span class="nav-number">1.1.1.</span> <span class="nav-text">操作系统的目标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作系统的作用"><span class="nav-number">1.1.2.</span> <span class="nav-text">操作系统的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#推动操作系统发展的动力"><span class="nav-number">1.1.3.</span> <span class="nav-text">推动操作系统发展的动力</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#操作系统的发展过程"><span class="nav-number">1.2.</span> <span class="nav-text">操作系统的发展过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#未配置操作系统的计算机系统"><span class="nav-number">1.2.1.</span> <span class="nav-text">未配置操作系统的计算机系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单批道处理系统"><span class="nav-number">1.2.2.</span> <span class="nav-text">单批道处理系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多批道处理系统"><span class="nav-number">1.2.3.</span> <span class="nav-text">多批道处理系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分时系统"><span class="nav-number">1.2.4.</span> <span class="nav-text">分时系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实时系统"><span class="nav-number">1.2.5.</span> <span class="nav-text">实时系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#微机操作系统的发展"><span class="nav-number">1.2.6.</span> <span class="nav-text">微机操作系统的发展</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本特征"><span class="nav-number">1.3.</span> <span class="nav-text">基本特征</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#并发"><span class="nav-number">1.3.1.</span> <span class="nav-text">并发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#共享"><span class="nav-number">1.3.2.</span> <span class="nav-text">共享</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#虚拟"><span class="nav-number">1.3.3.</span> <span class="nav-text">虚拟</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CangHai</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

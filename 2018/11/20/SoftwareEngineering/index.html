@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Software Engineering," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="概述软件危机计算机发展早期，软件为个人编写使用。后来计算机迅速发展，软件数量急剧膨胀，需求与维护工作增加，资源耗费巨大，出现了软件危机。软件危机是指软件在开发和维护过程中遇到的一系列严重问题。软件危机含两方面问题：如何开发软件，以面对软件日益增长的需求；如何维护数量不断膨胀的已有软件。 原因 软件维护通常意味着改正或修改原来的设计，客观使软件较难维护。 很多软件开发人员没有对软件开发和维护的观念，">
+<meta name="keywords" content="Software Engineering">
+<meta property="og:type" content="article">
+<meta property="og:title" content="软件工程">
+<meta property="og:url" content="http://canghai666x.github.io/2018/11/20/SoftwareEngineering/index.html">
+<meta property="og:site_name" content="CangHai&#39;s Blog">
+<meta property="og:description" content="概述软件危机计算机发展早期，软件为个人编写使用。后来计算机迅速发展，软件数量急剧膨胀，需求与维护工作增加，资源耗费巨大，出现了软件危机。软件危机是指软件在开发和维护过程中遇到的一系列严重问题。软件危机含两方面问题：如何开发软件，以面对软件日益增长的需求；如何维护数量不断膨胀的已有软件。 原因 软件维护通常意味着改正或修改原来的设计，客观使软件较难维护。 很多软件开发人员没有对软件开发和维护的观念，">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-09-23T02:42:06.728Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="软件工程">
+<meta name="twitter:description" content="概述软件危机计算机发展早期，软件为个人编写使用。后来计算机迅速发展，软件数量急剧膨胀，需求与维护工作增加，资源耗费巨大，出现了软件危机。软件危机是指软件在开发和维护过程中遇到的一系列严重问题。软件危机含两方面问题：如何开发软件，以面对软件日益增长的需求；如何维护数量不断膨胀的已有软件。 原因 软件维护通常意味着改正或修改原来的设计，客观使软件较难维护。 很多软件开发人员没有对软件开发和维护的观念，">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://canghai666x.github.io/2018/11/20/SoftwareEngineering/"/>
+
+
+
+
+
+  <title>软件工程 | CangHai's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">CangHai's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">沧海的个人博客</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            Commonweal 404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://canghai666x.github.io/2018/11/20/SoftwareEngineering/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CangHai">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CangHai's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">软件工程</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-20T00:00:00+08:00">
+                2018-11-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><h3 id="软件危机"><a href="#软件危机" class="headerlink" title="软件危机"></a>软件危机</h3><p>计算机发展早期，软件为个人编写使用。后来计算机迅速发展，软件数量急剧膨胀，需求与维护工作增加，资源耗费巨大，出现了软件危机。<br>软件危机是指软件在开发和维护过程中遇到的一系列严重问题。<br>软件危机含两方面问题：如何开发软件，以面对软件日益增长的需求；如何维护数量不断膨胀的已有软件。</p>
+<h4 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h4><ul>
+<li>软件维护通常意味着改正或修改原来的设计，客观使软件较难维护。</li>
+<li>很多软件开发人员没有对软件开发和维护的观念，在实践中采用了错误的方法和技术。</li>
+<li>计算机发展早期阶段的个人化特点，</li>
+<li>没有对用户需求的完整认识。<br>  一个软件从定义、开发、使用、维护到废弃，软件经历的漫长时期叫生命周期。<h4 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h4>为了解决软件危机，要有技术措施(方法和工具)，也要有必要的组织管理措施。<h3 id="软件生命周期"><a href="#软件生命周期" class="headerlink" title="软件生命周期"></a>软件生命周期</h3>概括地说，软件生命周期由软件定义，软件开发，软件维护三个时期组成。</li>
+</ul>
+<ol>
+<li>软件定义分为问题定义，可行性研究，需求分析。</li>
+<li>软件开发分为总体设计，详细设计，编码和单元测试，综合测试</li>
+<li>软件维护。<h3 id="软件过程"><a href="#软件过程" class="headerlink" title="软件过程"></a>软件过程</h3>软件过程是为了获得高质量软件的一系列任务的框架，规定了完成任务的工作步骤。</li>
+<li>瀑布模型</li>
+<li>快速原型模型<h2 id="可行性研究"><a href="#可行性研究" class="headerlink" title="可行性研究"></a>可行性研究</h2><h3 id="数据流图"><a href="#数据流图" class="headerlink" title="数据流图"></a>数据流图</h3>描绘信息流和数据从输入移动到输出的过程所经受的变换。<br>数据流图没有任何具体物理部件，只描绘数据在软件中流动和被处理的逻辑过程。<h4 id="符号"><a href="#符号" class="headerlink" title="符号"></a>符号</h4>正方形表示源点和终点，圆角矩形表示数据的处理，开口矩形代表数据存储，箭头表示数据流。<br>在数据流图中忽略出错处理和打开关闭文件的内务处理，基本要点是描述“做什么”，不考虑怎么做。<br>数据流图分为四忠诚纷纷，源点和终点，处理，数据存储，数据流。<h2 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h2>软件定义的最后一个时期，要求写出需求规格书。<h3 id="实体-联系图"><a href="#实体-联系图" class="headerlink" title="实体-联系图"></a>实体-联系图</h3>为了把用户的数据要求清楚准确的描述出来，通常寄哪里概念性的数据模型，ER图。<br>数据模型中包含了三种信息：数据对象，数据对象的属性，数据对象间的联系。<h4 id="符号-1"><a href="#符号-1" class="headerlink" title="符号"></a>符号</h4>矩形框代表实体，椭圆或圆角矩形代表属性，直线连接。<h3 id="状态转换图"><a href="#状态转换图" class="headerlink" title="状态转换图"></a>状态转换图</h3>在需求分析过程中应该建立起软件系统的行为模型。<br>状态转换图通过描绘系统的状态和引起系统状态转换的事件，来表示系统的行为。<br>状态图还指明了作为特定事件的结果系统将做哪些动作。<h4 id="状态"><a href="#状态" class="headerlink" title="状态"></a>状态</h4>状态是任何可以被观察到的系统行为模式。<br>初态，终态，中间状态。<h4 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h4>事件是在某个特定时刻发生的事情，引起系统从一个状态转换到另一个状态。<h4 id="符号-2"><a href="#符号-2" class="headerlink" title="符号"></a>符号</h4>初态用实心圆，终态同心圆。<br>中间状态圆角矩形，上中下三部分，上面名称，中间状态变量的名和值，下面是活动表。<br>活动表：do/动作<h2 id="总体设计"><a href="#总体设计" class="headerlink" title="总体设计"></a>总体设计</h2>概括地说，系统应该怎么做。<br>可以站在全局角度熵，花费较少成本，选出最合理的软件结构，从而用低成本开发出较高质量的软件系统。<h3 id="设计原理"><a href="#设计原理" class="headerlink" title="设计原理"></a>设计原理</h3></li>
+</ol>
+<ul>
+<li>模块化：把程序划分为独立的模块，使软件结构清晰，容易阅读和理解。</li>
+<li>抽象。</li>
+<li>逐步求精<h4 id="模块独立"><a href="#模块独立" class="headerlink" title="模块独立"></a>模块独立</h4>模块独立的概念是模块化、抽象、信息隐藏、局部化概念的直接结果。+<h5 id="耦合"><a href="#耦合" class="headerlink" title="耦合"></a>耦合</h5>耦合是对一个软件结构内不同模块之间互相连接成都的度量。<br>追求低耦合，这样研究测试单独模块，不用对其他模块了解过多。</li>
+<li>数据耦合：低耦合。仅仅通过参数交换数据。</li>
+<li>控制耦合：中等耦合。</li>
+<li>特征耦合：仅使用部分数据</li>
+<li>内容耦合：高耦合，避免。<h5 id="内聚"><a href="#内聚" class="headerlink" title="内聚"></a>内聚</h5>内聚标志一个模块内各个元素彼此结合的紧密程度。<br>设计时应做到高内聚。</li>
+<li>最高：功能内聚 10分</li>
+<li>最低：偶然内聚 0分。<h2 id="详细设计"><a href="#详细设计" class="headerlink" title="详细设计"></a>详细设计</h2>设计出程序蓝图，程序员根据蓝图写出实际代码。<h3 id="结构程序设计"><a href="#结构程序设计" class="headerlink" title="结构程序设计"></a>结构程序设计</h3>三种控制结构：顺序，选择，循环<h3 id="过程设计工具"><a href="#过程设计工具" class="headerlink" title="过程设计工具"></a>过程设计工具</h3>描述城市处理过程的工具称为过程设计的工具。它们的基本要求是能够提供对设计的无歧义的描述，指明控制流程、处理功能、数据组织和其他方面的细节，从而在编码阶段能直接翻译成代码。<h4 id="流程图"><a href="#流程图" class="headerlink" title="流程图"></a>流程图</h4></li>
+</ul>
+<ol>
+<li>本质不是逐步求精的好工具，过早考虑程序控制流程不考虑整体。</li>
+<li>箭头代表数据流，不受约束。</li>
+<li>不易表示数据结构<h4 id="盒图"><a href="#盒图" class="headerlink" title="盒图"></a>盒图</h4></li>
+<li>功能域明确。</li>
+<li>不能任意转移控制。</li>
+<li>很容易确定局部和全局数据的作用域。</li>
+<li>很容易表示嵌套关系，层次结构。<h4 id="PAD图"><a href="#PAD图" class="headerlink" title="PAD图"></a>PAD图</h4></li>
+<li>逻辑易懂，自上而下，从左到右。<h4 id="判定表"><a href="#判定表" class="headerlink" title="判定表"></a>判定表</h4>判定表能够表示复杂的条件组合和应做的动作之间的对应关系。<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2>编码和测试统称实现。<h3 id="编码"><a href="#编码" class="headerlink" title="编码"></a>编码</h3><h4 id="编码风格"><a href="#编码风格" class="headerlink" title="编码风格"></a>编码风格</h4>遵循规则</li>
+<li>内部文档</li>
+<li>数据说明</li>
+<li>语句构造</li>
+<li>输入输出</li>
+<li>效率<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><h3 id="单元测试"><a href="#单元测试" class="headerlink" title="单元测试"></a>单元测试</h3>单元测试集中测试软件最小的单元——模块。<h3 id="白盒测试"><a href="#白盒测试" class="headerlink" title="白盒测试"></a>白盒测试</h3>设计测试方案是测试阶段的关键技术问题。<br>把测试数据和预期输出结果称为测试用例。其中最困难的是设计测试的输入数据。<h4 id="逻辑覆盖"><a href="#逻辑覆盖" class="headerlink" title="逻辑覆盖"></a>逻辑覆盖</h4>有选择地执行程序中某些最具代表性的通路是对穷尽测试的唯一可行的替代办法。<h5 id="语句覆盖"><a href="#语句覆盖" class="headerlink" title="语句覆盖"></a>语句覆盖</h5>每个语句执行一次，语句覆盖是很弱的逻辑覆盖标准。<h5 id="判定覆盖"><a href="#判定覆盖" class="headerlink" title="判定覆盖"></a>判定覆盖</h5>判定的每种可能结果至少执行一次。覆盖成度不高。<h5 id="条件覆盖"><a href="#条件覆盖" class="headerlink" title="条件覆盖"></a>条件覆盖</h5>不仅每个语句至少执行一次，判定表达式中的每个条件都取到各种可能的结果。<br>可能不满足判定覆盖，不会把每条路径走一遍。<h5 id="条件组合覆盖"><a href="#条件组合覆盖" class="headerlink" title="条件组合覆盖"></a>条件组合覆盖</h5>选取足够多的测试数据，使得每个判定表达式中条件的各种可能组合都至少出现一次。<h3 id="黑盒测试"><a href="#黑盒测试" class="headerlink" title="黑盒测试"></a>黑盒测试</h3>黑盒测试着重测试软件功能。与白盒测试互补。<h4 id="等价划分"><a href="#等价划分" class="headerlink" title="等价划分"></a>等价划分</h4>把程序输入域划分为若干数据类，据此导出数据用例。<h2 id="面向对象方法学引论"><a href="#面向对象方法学引论" class="headerlink" title="面向对象方法学引论"></a>面向对象方法学引论</h2><h3 id="面向对象方法学"><a href="#面向对象方法学" class="headerlink" title="面向对象方法学"></a>面向对象方法学</h3><h4 id="要点"><a href="#要点" class="headerlink" title="要点"></a>要点</h4></li>
+<li>对象</li>
+<li>类</li>
+<li>继承</li>
+<li>封装<h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4></li>
+<li>与人类习惯的思维方式一致</li>
+<li>稳定性好</li>
+<li>可重用性好</li>
+<li>开发大型软件容易</li>
+<li>可维护性好<h3 id="对象模型"><a href="#对象模型" class="headerlink" title="对象模型"></a>对象模型</h3>对象模型表示静态的，结构化的系统的数据性质。<br>通常，使用UML类图来建立对象模型。<h4 id="符号-3"><a href="#符号-3" class="headerlink" title="符号"></a>符号</h4></li>
+<li>类的图形为长方形，上中下三层，名字，属性，服务。</li>
+<li>普通关联，只要类与类之间存在关系，就可以用普通关联来链接。</li>
+<li>聚集，是关联的特例。部分整体的关系<ul>
+<li>共享聚集：在整体类边线端画空心菱形。</li>
+<li>组合聚集：实心菱形。</li>
+</ul>
+</li>
+<li>泛化，继承。空心三角形，对着父类。<br> 抽象类:抽象操作后面有{abstract}</li>
+<li>依赖关系：虚线+实心三角</li>
+<li>细化：虚线+空心三角，抽象层次不同。<h3 id="动态模型"><a href="#动态模型" class="headerlink" title="动态模型"></a>动态模型</h3> 每个类的动态行为用一个状态图表示，各个类的状态图通过共享事件合起来，组成系统的动态模型。<h3 id="功能模型"><a href="#功能模型" class="headerlink" title="功能模型"></a>功能模型</h3>功能模型表示变化的系统的“功能”性质，它指明了系统应该“做什么”，因此更直接的反映了用户对系统的需求。<h4 id="用例图"><a href="#用例图" class="headerlink" title="用例图"></a>用例图</h4>一个用例图包含的模型元素有系统、行为者、用例及用例之间的关系。</li>
+<li>系统被看作一个提供用例的黑盒子。方框表示。</li>
+<li>一个用例是可以被行为者感受到的，系统的一个完整的功能。用例是一个类，不是具体实例。椭圆表示。</li>
+<li>行为者，与系统交互使用用例的人。</li>
+<li>用例之间的关系：<ul>
+<li>扩展关系：向一个用例中添加一些动作称为另一个用例，后者称为扩展用例。</li>
+<li>使用关系：一个用例使用另一个用例，构成使用关系。在多个用例出现重复描述时，采用使用关系。<h3 id="3种模型的关系"><a href="#3种模型的关系" class="headerlink" title="3种模型的关系"></a>3种模型的关系</h3></li>
+</ul>
+</li>
+<li>针对每个类建立的动态模型，描述了类实例的生命周期或运行周期。</li>
+<li>状态转换驱使行为发生，这些行为在数据流图中映射为处理，在用例图中映射为用例，与类图中的服务队形。</li>
+<li>功能模型中的处理(用例)对应对象模型中类的服务。<h2 id="面向对象分析"><a href="#面向对象分析" class="headerlink" title="面向对象分析"></a>面向对象分析</h2><h3 id="面向对象分析基本过程"><a href="#面向对象分析基本过程" class="headerlink" title="面向对象分析基本过程"></a>面向对象分析基本过程</h3></li>
+</ol>
+<ul>
+<li>从分析陈述用户需求的文件开始。</li>
+<li>系统分析员应该深入理解用户需求<h4 id="三个子模型与五个层次"><a href="#三个子模型与五个层次" class="headerlink" title="三个子模型与五个层次"></a>三个子模型与五个层次</h4>三个要素：<br>  静态结构(对象模型)、交互次序(动态模型)、数据变化(功能模型)<br>复杂系统容的对象模型通常由下述5个层次组成：<br>  主题层、类与对象层、结构层、属性层、服务层<br>主题是指导读者理解大型、复杂模型的一种范畴。通过划分主题把一个大型、复杂的对象模型分解成几个不同的范畴。<h3 id="建立对象模型"><a href="#建立对象模型" class="headerlink" title="建立对象模型"></a>建立对象模型</h3>面向对象分析首要的工作，是建立问题域的对象模型。<br>对象模型由5个层次，典型的工作步骤是：<br>  首先确认对象类和关联，对于大型复杂问题还要进一步划分出若干个主题，然后给类和关联增添属性，接下来利用继承关系进一步合并和组织类。<br>  而对类中操作的最后确定，则需等到建立了动态模型和功能模型之后，因为这两个字模型更准确地描述了对类中提供的服务的需求。<h3 id="建立动态模型"><a href="#建立动态模型" class="headerlink" title="建立动态模型"></a>建立动态模型</h3><h4 id="编写脚本"><a href="#编写脚本" class="headerlink" title="编写脚本"></a>编写脚本</h4>脚本描述用户与目标系统之间的一个或多个典型的交互过程，以确定对目标系统的行为由更具体的认识。<h4 id="画事件跟踪图"><a href="#画事件跟踪图" class="headerlink" title="画事件跟踪图"></a>画事件跟踪图</h4>分析脚本，提取外部事件，画出事件跟踪图。<h4 id="画状态图。"><a href="#画状态图。" class="headerlink" title="画状态图。"></a>画状态图。</h4>状态图描绘事件与对象状态的关系。<h3 id="建立功能模型"><a href="#建立功能模型" class="headerlink" title="建立功能模型"></a>建立功能模型</h3>画数据流图<h3 id="定义服务"><a href="#定义服务" class="headerlink" title="定义服务"></a>定义服务</h3></li>
+<li>常规行为</li>
+<li>从事件导出的操作</li>
+<li>与数据流图中处理框对应的操作</li>
+<li>利用继承减少冗余<h2 id="面向对象设计"><a href="#面向对象设计" class="headerlink" title="面向对象设计"></a>面向对象设计</h2><h3 id="准则"><a href="#准则" class="headerlink" title="准则"></a>准则</h3></li>
+<li>模块化</li>
+<li>抽象</li>
+<li>信息隐藏(封装)</li>
+<li>弱耦合</li>
+<li>强内聚</li>
+<li>可重用</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Software-Engineering/" rel="tag"># Software Engineering</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/19/learnMVC/" rel="next" title="learnMVC">
+                <i class="fa fa-chevron-left"></i> learnMVC
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/11/26/java判断相等/" rel="prev" title="关于java中判断相等的一些思考">
+                关于java中判断相等的一些思考 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">CangHai</p>
+              <p class="site-description motion-element" itemprop="description">沧海的个人博客，记载我的学习经验</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#软件危机"><span class="nav-number">1.1.</span> <span class="nav-text">软件危机</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#原因"><span class="nav-number">1.1.1.</span> <span class="nav-text">原因</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解决"><span class="nav-number">1.1.2.</span> <span class="nav-text">解决</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#软件生命周期"><span class="nav-number">1.2.</span> <span class="nav-text">软件生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#软件过程"><span class="nav-number">1.3.</span> <span class="nav-text">软件过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可行性研究"><span class="nav-number">2.</span> <span class="nav-text">可行性研究</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据流图"><span class="nav-number">2.1.</span> <span class="nav-text">数据流图</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#符号"><span class="nav-number">2.1.1.</span> <span class="nav-text">符号</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#需求分析"><span class="nav-number">3.</span> <span class="nav-text">需求分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实体-联系图"><span class="nav-number">3.1.</span> <span class="nav-text">实体-联系图</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#符号-1"><span class="nav-number">3.1.1.</span> <span class="nav-text">符号</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#状态转换图"><span class="nav-number">3.2.</span> <span class="nav-text">状态转换图</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#状态"><span class="nav-number">3.2.1.</span> <span class="nav-text">状态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#事件"><span class="nav-number">3.2.2.</span> <span class="nav-text">事件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#符号-2"><span class="nav-number">3.2.3.</span> <span class="nav-text">符号</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总体设计"><span class="nav-number">4.</span> <span class="nav-text">总体设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#设计原理"><span class="nav-number">4.1.</span> <span class="nav-text">设计原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#模块独立"><span class="nav-number">4.1.1.</span> <span class="nav-text">模块独立</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#耦合"><span class="nav-number">4.1.1.1.</span> <span class="nav-text">耦合</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#内聚"><span class="nav-number">4.1.1.2.</span> <span class="nav-text">内聚</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#详细设计"><span class="nav-number">5.</span> <span class="nav-text">详细设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#结构程序设计"><span class="nav-number">5.1.</span> <span class="nav-text">结构程序设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#过程设计工具"><span class="nav-number">5.2.</span> <span class="nav-text">过程设计工具</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#流程图"><span class="nav-number">5.2.1.</span> <span class="nav-text">流程图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#盒图"><span class="nav-number">5.2.2.</span> <span class="nav-text">盒图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PAD图"><span class="nav-number">5.2.3.</span> <span class="nav-text">PAD图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#判定表"><span class="nav-number">5.2.4.</span> <span class="nav-text">判定表</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现"><span class="nav-number">6.</span> <span class="nav-text">实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#编码"><span class="nav-number">6.1.</span> <span class="nav-text">编码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#编码风格"><span class="nav-number">6.1.1.</span> <span class="nav-text">编码风格</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试"><span class="nav-number">7.</span> <span class="nav-text">测试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#单元测试"><span class="nav-number">7.1.</span> <span class="nav-text">单元测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#白盒测试"><span class="nav-number">7.2.</span> <span class="nav-text">白盒测试</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#逻辑覆盖"><span class="nav-number">7.2.1.</span> <span class="nav-text">逻辑覆盖</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#语句覆盖"><span class="nav-number">7.2.1.1.</span> <span class="nav-text">语句覆盖</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#判定覆盖"><span class="nav-number">7.2.1.2.</span> <span class="nav-text">判定覆盖</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#条件覆盖"><span class="nav-number">7.2.1.3.</span> <span class="nav-text">条件覆盖</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#条件组合覆盖"><span class="nav-number">7.2.1.4.</span> <span class="nav-text">条件组合覆盖</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#黑盒测试"><span class="nav-number">7.3.</span> <span class="nav-text">黑盒测试</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#等价划分"><span class="nav-number">7.3.1.</span> <span class="nav-text">等价划分</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#面向对象方法学引论"><span class="nav-number">8.</span> <span class="nav-text">面向对象方法学引论</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#面向对象方法学"><span class="nav-number">8.1.</span> <span class="nav-text">面向对象方法学</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#要点"><span class="nav-number">8.1.1.</span> <span class="nav-text">要点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#优点"><span class="nav-number">8.1.2.</span> <span class="nav-text">优点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对象模型"><span class="nav-number">8.2.</span> <span class="nav-text">对象模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#符号-3"><span class="nav-number">8.2.1.</span> <span class="nav-text">符号</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态模型"><span class="nav-number">8.3.</span> <span class="nav-text">动态模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#功能模型"><span class="nav-number">8.4.</span> <span class="nav-text">功能模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#用例图"><span class="nav-number">8.4.1.</span> <span class="nav-text">用例图</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3种模型的关系"><span class="nav-number">8.5.</span> <span class="nav-text">3种模型的关系</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#面向对象分析"><span class="nav-number">9.</span> <span class="nav-text">面向对象分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#面向对象分析基本过程"><span class="nav-number">9.1.</span> <span class="nav-text">面向对象分析基本过程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#三个子模型与五个层次"><span class="nav-number">9.1.1.</span> <span class="nav-text">三个子模型与五个层次</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#建立对象模型"><span class="nav-number">9.2.</span> <span class="nav-text">建立对象模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#建立动态模型"><span class="nav-number">9.3.</span> <span class="nav-text">建立动态模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#编写脚本"><span class="nav-number">9.3.1.</span> <span class="nav-text">编写脚本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#画事件跟踪图"><span class="nav-number">9.3.2.</span> <span class="nav-text">画事件跟踪图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#画状态图。"><span class="nav-number">9.3.3.</span> <span class="nav-text">画状态图。</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#建立功能模型"><span class="nav-number">9.4.</span> <span class="nav-text">建立功能模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#定义服务"><span class="nav-number">9.5.</span> <span class="nav-text">定义服务</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#面向对象设计"><span class="nav-number">10.</span> <span class="nav-text">面向对象设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#准则"><span class="nav-number">10.1.</span> <span class="nav-text">准则</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CangHai</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

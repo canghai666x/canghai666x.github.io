@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="AI," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="搜索问题人类的思维过程，可以看作是一个搜索的过程。 一般而言，很多问题可以转化为状态空间的搜索问题。而问题的解，则是一个合法状态序列，其中序列的第一个状态是问题的初始状态。而最后的状态则是结束状态。之间的则是中间状态。除了第一个状态外，该序列中任何一个状态都可以通过一条规则由与他相临的前一个状态转化得到。 使用不同的搜索策略，找到解的搜索空间范围是有区别的。一般而言，对大空间问题，搜索策略是要解决">
+<meta name="keywords" content="AI">
+<meta property="og:type" content="article">
+<meta property="og:title" content="搜索问题">
+<meta property="og:url" content="http://canghai666x.github.io/2018/09/12/搜索问题/index.html">
+<meta property="og:site_name" content="CangHai&#39;s Blog">
+<meta property="og:description" content="搜索问题人类的思维过程，可以看作是一个搜索的过程。 一般而言，很多问题可以转化为状态空间的搜索问题。而问题的解，则是一个合法状态序列，其中序列的第一个状态是问题的初始状态。而最后的状态则是结束状态。之间的则是中间状态。除了第一个状态外，该序列中任何一个状态都可以通过一条规则由与他相临的前一个状态转化得到。 使用不同的搜索策略，找到解的搜索空间范围是有区别的。一般而言，对大空间问题，搜索策略是要解决">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-09-23T02:42:06.729Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="搜索问题">
+<meta name="twitter:description" content="搜索问题人类的思维过程，可以看作是一个搜索的过程。 一般而言，很多问题可以转化为状态空间的搜索问题。而问题的解，则是一个合法状态序列，其中序列的第一个状态是问题的初始状态。而最后的状态则是结束状态。之间的则是中间状态。除了第一个状态外，该序列中任何一个状态都可以通过一条规则由与他相临的前一个状态转化得到。 使用不同的搜索策略，找到解的搜索空间范围是有区别的。一般而言，对大空间问题，搜索策略是要解决">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://canghai666x.github.io/2018/09/12/搜索问题/"/>
+
+
+
+
+
+  <title>搜索问题 | CangHai's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">CangHai's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">沧海的个人博客</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            Commonweal 404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://canghai666x.github.io/2018/09/12/搜索问题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CangHai">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CangHai's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">搜索问题</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-12T20:00:43+08:00">
+                2018-09-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="搜索问题"><a href="#搜索问题" class="headerlink" title="搜索问题"></a>搜索问题</h1><pre><code>人类的思维过程，可以看作是一个搜索的过程。
+</code></pre><p>一般而言，很多问题可以转化为状态空间的搜索问题。而问题的解，则是一个合法状态序列，其中序列的第一个状态是问题的<em>初始状态</em>。而最后的状态则是<em>结束状态</em>。之间的则是<em>中间状态</em>。除了第一个状态外，该序列中任何一个状态都可以通过一条<em>规则</em>由与他相临的前一个状态转化得到。</p>
+<p>使用不同的搜索策略，找到解的搜索空间范围是有区别的。一般而言，对大空间问题，搜索策略是要解决组合爆炸的问题。</p>
+<p>通常搜索策略的主要任务是确定如何选取规则的方式。有两种基本方式，一种是不考虑给定问题的特定知识，系统根据事先确定好的某种固定排序，依次调用规则或随机调用规则，这实际上是<strong>盲目搜索</strong>的方法，一般统称为<strong>无信息引导的搜索策略</strong>。<br>另一种是考虑问题领域可应用的知识，动态地确定规则的排序，优先调用合适的规则使用，这就是通常称为<strong>启发式搜索策略</strong>或<strong>有信息引导的搜索策略</strong>。</p>
+<h2 id="回溯策略"><a href="#回溯策略" class="headerlink" title="回溯策略"></a>回溯策略</h2><p>回溯策略属于盲目搜索的一种。<br>首先将规则给出一个固定的排序，在搜索时，对当前状态(初始状态)依次检测每一条规则，在当前状态未使用过的规则中找到第一条可用规则，应用于当前状态，得到的新状态重新设置为当前状态，并重复以上搜索。如果当前状态无规则所言，或者所有规则已经被试探过仍未找到问题的解，则当前状态的前一个状态(即直接生成该状态的状态)设置为当前状态。重复以上搜索，知道找到问题的解，或者试探了所有可能扔找不到问题的解为止。</p>
+<h3 id="递归过程BACKTRACK-DATA"><a href="#递归过程BACKTRACK-DATA" class="headerlink" title="递归过程BACKTRACK(DATA)"></a>递归过程BACKTRACK(DATA)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">1. if team(data),return NIL; //team取true则找到目标，返回空表NIL。</span><br><span class="line">2. if deadend(data) ,return FAIL;deadend取true,则状态不合法。</span><br><span class="line">3. rules=apprules(datas); //计算可用规则集，按某种原则赋予rules.</span><br><span class="line">4. loop: if NULL(rules), return FAIL; //NULL取真，则规则用完未找到目标。</span><br><span class="line">5. R=first(rules);//取第一条可用规则。</span><br><span class="line">6. rules=tail(rules); //删去第一条规则。</span><br><span class="line">7. rdata=gen(r,data); //调用规则r作用于当前状态，生成新状态。</span><br><span class="line">8. path=backtrack(rdata); //对新状态递归调用本过程。</span><br><span class="line">9. if path == FAIL, go loop; //当path=fail，递归调用失败，规则转移进行下一组测试。</span><br><span class="line">10. return cons(r,path); //返回解路径规则表。</span><br></pre></td></tr></table></figure>
+<h3 id="递归过程BACKTRACK1-DATALIST"><a href="#递归过程BACKTRACK1-DATALIST" class="headerlink" title="递归过程BACKTRACK1(DATALIST)"></a>递归过程BACKTRACK1(DATALIST)</h3><p>上面的递归算法中设置了两个回溯点，一个是遇到非法状态，一个是试探了一个状态的所有子状态，仍找不到解时回溯。<br>对于某些问题会遇到这样的问题，某些问题某分支有无穷个状态，算法永远出不来，另一个问题是，遇到环路，搜索一直在环路中进行下去，都无法找到问题的解。</p>
+<p>现为解决以上问题，给出递归算法1，增加两个回溯点：一个是用常量bound限制最大深度，避免落入深渊，无法回溯出来。另一个是讲过程的参数用初始状态到当前状态的表来代替当前状态，当新的状态产生时，查看是否已经在该表中出现过了，如果出现了，则表明有环路存在，进行回溯。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">1. data=first(datalist); //设置data为当前状态。</span><br><span class="line">2. if member(data,tail(datalist)),return FAIL; //取尾操作，表datalist中除了第一个以外所有元素，如果data在其中存在，则表示有环路，返回FAIL，回溯。</span><br><span class="line">3. if term(data),return NIL; //term取真，找到目标，返回空表。</span><br><span class="line">4. if deadend(data) ,return FAIL;deadend取true,则状态不合法。</span><br><span class="line">5. if length(datalist)&gt;bound,return FAIL; //计算搜索长度，大于bound，回溯。</span><br><span class="line">6. rules=apprules(datas); //计算可用规则集，按某种原则赋予rules.</span><br><span class="line">7. loop: if NULL(rules), return FAIL; //NULL取真，则规则用完未找到目标。</span><br><span class="line">8. R=first(rules);//取第一条可用规则。</span><br><span class="line">9.  rules=tail(rules); //删去第一条规则。</span><br><span class="line">10. rdata=gen(r,data); //调用规则r作用于当前状态，生成新状态。</span><br><span class="line">11. rdatalist=cons(rdata,datalist); //将新状态加入到表datalist中。</span><br><span class="line">12. path=backtrack(rdatalist); //对新状态递归调用本过程。</span><br><span class="line">13. if path == FAIL, go loop; //当path=fail，递归调用失败，规则转移进行下一组测试。</span><br><span class="line">14.  return cons(r,path); //返回解路径规则表。</span><br></pre></td></tr></table></figure></p>
+<h2 id="图搜索策略"><a href="#图搜索策略" class="headerlink" title="图搜索策略"></a>图搜索策略</h2><p>回溯搜索策略只保留了从初始状态到当前状态的一条路径，当回溯出现时，回溯点处进行的搜索将被算法遗忘。其好处是节省了存储空间，而不足是这些被回溯掉的已经搜索过的部分，不能被以后使用。与之相对，讲所有搜索过的状态记录下来的搜索方法称为“图搜索”，搜索过的路径除了可以重复利用外，其最大的优点是可以更有效地利用与问题有关的一些知识，从而达到启发式搜索的目的。</p>
+<p>图搜索策略是实现从一个隐含图中，生成出一部分确实含有一个目标节点的显式表示子图的搜索过程。</p>
+<p><strong>一般图搜索算法</strong></p>
+<ul>
+<li>open表存放刚生成的节点</li>
+<li>closed表存放已访问的节点<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">1. g=g0(g0=s),open=(s); //g表示图，s为初始节点，设置open表，最初只含初始节点。</span><br><span class="line">2. closed=()； //设置closed表为空表。</span><br><span class="line">3. loop: if open==(),then exit(FAIL);</span><br><span class="line">4. n=first(open),remove(n,open),add(n,closed);//n为当前节点。</span><br><span class="line">5. if goal(n),then exit(success); //由n返回到s路径上的指针，可以给出解决路径。</span><br><span class="line">6. expand(n)-&gt;&#123;mi&#125;,g=add(mi,g); //子节点集&#123;mi&#125;中不包含n的父辈节点。</span><br><span class="line">7. 标记和修改指针：</span><br><span class="line">    * add(mj,open),并标记mj连接到n的指针;//mj为open和closed中未出现过的子节点;</span><br><span class="line">    * 计算是否要修改mk,m1到n的指针; //mk为已出现在open中的子节点,m1为一出现在closed中的子节点,&#123;mi&#125;=&#123;mj&#125;U&#123;mk&#125;U&#123;m1&#125;;</span><br><span class="line">    * 计算是狗要修改m1到其后继节点的指针。</span><br><span class="line">8. 对open中的节点按照某种原则重新排序。</span><br><span class="line">9 go loop.</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/AI/" rel="tag"># AI</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/10/OS1/" rel="next" title="操作系统笔记">
+                <i class="fa fa-chevron-left"></i> 操作系统笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/09/19/learnMVC/" rel="prev" title="learnMVC">
+                learnMVC <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">CangHai</p>
+              <p class="site-description motion-element" itemprop="description">沧海的个人博客，记载我的学习经验</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#搜索问题"><span class="nav-number">1.</span> <span class="nav-text">搜索问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#回溯策略"><span class="nav-number">1.1.</span> <span class="nav-text">回溯策略</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#递归过程BACKTRACK-DATA"><span class="nav-number">1.1.1.</span> <span class="nav-text">递归过程BACKTRACK(DATA)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#递归过程BACKTRACK1-DATALIST"><span class="nav-number">1.1.2.</span> <span class="nav-text">递归过程BACKTRACK1(DATALIST)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图搜索策略"><span class="nav-number">1.2.</span> <span class="nav-text">图搜索策略</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CangHai</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

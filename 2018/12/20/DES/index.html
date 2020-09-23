@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="encryption," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="DES原理简介DES加密算法，一种对称加密算法，加密速度比较快。DES算法有三个参数：Key（密钥）,Data（数据），Mode（加密/解密）。DES将64位明文加密位64位密文，当文本更长时划分位64位块进行每块一加密。DES加密和解密的流程是一样的，唯一不一样的地方在于密钥的顺序相反，如10100变成00101 流程图 加密过程获取子密钥KiDES初始密钥为64位，按8行8列从左往右上下排列，">
+<meta name="keywords" content="encryption">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DES">
+<meta property="og:url" content="http://canghai666x.github.io/2018/12/20/DES/index.html">
+<meta property="og:site_name" content="CangHai&#39;s Blog">
+<meta property="og:description" content="DES原理简介DES加密算法，一种对称加密算法，加密速度比较快。DES算法有三个参数：Key（密钥）,Data（数据），Mode（加密/解密）。DES将64位明文加密位64位密文，当文本更长时划分位64位块进行每块一加密。DES加密和解密的流程是一样的，唯一不一样的地方在于密钥的顺序相反，如10100变成00101 流程图 加密过程获取子密钥KiDES初始密钥为64位，按8行8列从左往右上下排列，">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/0063dFB6gy1fycg5qjp45j30f90eegmy.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/0063dFB6gy1fycgfatopaj30bh09tdhn.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/0063dFB6gy1fycgidojjjj309f09sta5.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/0063dFB6gy1fycgkece9uj30et031q3e.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/0063dFB6gy1fycgmv4amij308908aq42.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/0063dFB6gy1fycgvreaznj30by09mq2y.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/0063dFB6gy1fych1ck1mwj30hf08a74z.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/0063dFB6gy1fych8a323bj30gx0qpt91.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/0063dFB6gy1fychev90c6j306e0b0gmf.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/0063dFB6gy1fychp0fbftj308t08l75o.jpg">
+<meta property="og:updated_time" content="2020-09-23T02:42:06.727Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="DES">
+<meta name="twitter:description" content="DES原理简介DES加密算法，一种对称加密算法，加密速度比较快。DES算法有三个参数：Key（密钥）,Data（数据），Mode（加密/解密）。DES将64位明文加密位64位密文，当文本更长时划分位64位块进行每块一加密。DES加密和解密的流程是一样的，唯一不一样的地方在于密钥的顺序相反，如10100变成00101 流程图 加密过程获取子密钥KiDES初始密钥为64位，按8行8列从左往右上下排列，">
+<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/0063dFB6gy1fycg5qjp45j30f90eegmy.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://canghai666x.github.io/2018/12/20/DES/"/>
+
+
+
+
+
+  <title>DES | CangHai's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">CangHai's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">沧海的个人博客</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            Commonweal 404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://canghai666x.github.io/2018/12/20/DES/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CangHai">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CangHai's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">DES</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-20T00:01:07+08:00">
+                2018-12-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="DES原理"><a href="#DES原理" class="headerlink" title="DES原理"></a>DES原理</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>DES加密算法，一种对称加密算法，加密速度比较快。<br>DES算法有三个参数：Key（密钥）,Data（数据），Mode（加密/解密）。<br>DES将64位明文加密位64位密文，当文本更长时划分位64位块进行每块一加密。<br>DES加密和解密的流程是一样的，唯一不一样的地方在于密钥的顺序相反，如10100变成00101</p>
+<h2 id="流程图"><a href="#流程图" class="headerlink" title="流程图"></a>流程图</h2><p><img src="https://ws1.sinaimg.cn/large/0063dFB6gy1fycg5qjp45j30f90eegmy.jpg" alt=""></p>
+<h2 id="加密过程"><a href="#加密过程" class="headerlink" title="加密过程"></a>加密过程</h2><h3 id="获取子密钥Ki"><a href="#获取子密钥Ki" class="headerlink" title="获取子密钥Ki"></a>获取子密钥Ki</h3><p>DES初始密钥为64位，按8行8列从左往右上下排列，其中每行第八位用于奇偶校验(完整性)，不参与加密，实际参与加密运算的为56位。<br>54位的实际Key经过密钥置换表PC-1置换之后，生成新的56位的串。<br>这个密钥置换表貌似是固定的，因为解密加密是相同的操作，如果不固定怎么解密。<br><img src="https://ws1.sinaimg.cn/large/0063dFB6gy1fycgfatopaj30bh09tdhn.jpg" alt=""><br>经过PC-1置换后，将56位分为前28位C0和后28位D0两部分。<br>然后分别循环左移1位得到C1和D1，然后合并成56位。<br>然后经过PC-2压缩置换后生成48位的子密钥K1。<br><img src="https://ws1.sinaimg.cn/large/0063dFB6gy1fycgidojjjj309f09sta5.jpg" alt=""><br>C1、D1分别循环左移1位得到C2、D2，合并后经过PC-2压缩置换生成子密钥K2.<br>同理，直至生成K16.每轮循环左移的位数也是固定的：<br><img src="https://ws1.sinaimg.cn/large/0063dFB6gy1fycgkece9uj30et031q3e.jpg" alt=""></p>
+<h3 id="密码函数F"><a href="#密码函数F" class="headerlink" title="密码函数F"></a>密码函数F</h3><h4 id="IP置换"><a href="#IP置换" class="headerlink" title="IP置换"></a>IP置换</h4><p>64位数据经过IP表进行置换，生成后的新64位数据分为坐32位L0和右32位R0.<br><img src="https://ws1.sinaimg.cn/large/0063dFB6gy1fycgmv4amij308908aq42.jpg" alt=""></p>
+<h4 id="E扩展置换"><a href="#E扩展置换" class="headerlink" title="E扩展置换"></a>E扩展置换</h4><p>将IP置换后的右半部分R0，扩展为48位输出。<br>扩展置换表：<br><img src="https://ws1.sinaimg.cn/large/0063dFB6gy1fycgvreaznj30by09mq2y.jpg" alt=""><br>将32位分为4位8列，两边取相邻的位进行扩展。</p>
+<h4 id="异或运算"><a href="#异或运算" class="headerlink" title="异或运算"></a>异或运算</h4><p>将扩展输出的48位和子密钥异或得到48位数据。</p>
+<h4 id="S盒置换"><a href="#S盒置换" class="headerlink" title="S盒置换"></a>S盒置换</h4><p>将异或后的数据送入S盒，S盒置换由8个不同的S盒完成，每个S盒有6位输入4位输出。48位输入分为8个6位分组，输入到8个S盒中，在相应的S盒中置换。<br><img src="https://ws1.sinaimg.cn/large/0063dFB6gy1fych1ck1mwj30hf08a74z.jpg" alt=""><br>一个S盒就i是一个4行16列的表，盒中每一项都是一个4位的数(0000-1111即0-15)，S盒的6个输入确定了选择哪个项进行输出。<br>输入的6位中，最高最低两位选择行数，中间四位选择列数，选择到的那个数字，就是S盒的输出值。<br>（想不到吧，其他的都是用原文密钥通过某种函数来变换位置，这一步是通过数值确定坐标选择固定的表[S盒]中的值）<br><img src="https://ws1.sinaimg.cn/large/0063dFB6gy1fych8a323bj30gx0qpt91.jpg" alt="8个S盒的表格"><br>例如S盒8的的输入是110011，第1位和第6位组合11，对应第三行，第二到第五位是1001，对应第9列，S盒8行9列的项是12，因此用12的二进制1100来代替输入110011输出。<br>S盒置换过程输出8个4位的分组，组合在一起形成32位数据。<br>S盒置换是DES算法的关键步骤，其他的运算都是线性的，容易分析，而S盒是非线性的，更安全。</p>
+<h4 id="P盒置换"><a href="#P盒置换" class="headerlink" title="P盒置换"></a>P盒置换</h4><p>S盒的32位结果通过P盒再置换一次，生成新的32位输出结果。<br><img src="https://ws1.sinaimg.cn/large/0063dFB6gy1fychev90c6j306e0b0gmf.jpg" alt=""></p>
+<h3 id="迭代运算"><a href="#迭代运算" class="headerlink" title="迭代运算"></a>迭代运算</h3><p>第一轮：R0与子密钥K1经过密码函数F(R0,K1)得到32位输出f1,f1与L0二进制异或赋值给R1，R0原封不动赋值给L1。<br>第二轮：R1与子密钥K2经过密码函数F(R1,K2)得到32位输出f2，f2与L1二进制异或复制给R2，R1原封不动复制给L2.<br>一共进行16轮，最后生成L16，R16.</p>
+<h3 id="末置换"><a href="#末置换" class="headerlink" title="末置换"></a>末置换</h3><p>L16与R16合并在一起64位，经过末置换表IP-1置换，得到64位密文输出。<br><img src="https://ws1.sinaimg.cn/large/0063dFB6gy1fychp0fbftj308t08l75o.jpg" alt=""></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/encryption/" rel="tag"># encryption</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/09/SSL实验报告/" rel="next" title="SSL协议配置及分析">
+                <i class="fa fa-chevron-left"></i> SSL协议配置及分析
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/30/learnPostgres/" rel="prev" title="learnPostgres">
+                learnPostgres <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">CangHai</p>
+              <p class="site-description motion-element" itemprop="description">沧海的个人博客，记载我的学习经验</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#DES原理"><span class="nav-number">1.</span> <span class="nav-text">DES原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#流程图"><span class="nav-number">1.2.</span> <span class="nav-text">流程图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#加密过程"><span class="nav-number">1.3.</span> <span class="nav-text">加密过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#获取子密钥Ki"><span class="nav-number">1.3.1.</span> <span class="nav-text">获取子密钥Ki</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#密码函数F"><span class="nav-number">1.3.2.</span> <span class="nav-text">密码函数F</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#IP置换"><span class="nav-number">1.3.2.1.</span> <span class="nav-text">IP置换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#E扩展置换"><span class="nav-number">1.3.2.2.</span> <span class="nav-text">E扩展置换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#异或运算"><span class="nav-number">1.3.2.3.</span> <span class="nav-text">异或运算</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#S盒置换"><span class="nav-number">1.3.2.4.</span> <span class="nav-text">S盒置换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#P盒置换"><span class="nav-number">1.3.2.5.</span> <span class="nav-text">P盒置换</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#迭代运算"><span class="nav-number">1.3.3.</span> <span class="nav-text">迭代运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#末置换"><span class="nav-number">1.3.4.</span> <span class="nav-text">末置换</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CangHai</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

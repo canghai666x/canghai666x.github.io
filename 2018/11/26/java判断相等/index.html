@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="java," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="关于java中判断相等的一些思考前两天，一个网友在群里问了一个问题，关于java的String判断相等。举个简单的例子输出结果是falsefalse而使用equals方法来判断结果就是truetrue由此，我们知道，在java中想判断两个字符串的内容是否相同，应该使用String对象的equals方法。但是在这里我们只是知道了How，却不知道Why。我对此有了好奇心，为什么java的String这">
+<meta name="keywords" content="java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于java中判断相等的一些思考">
+<meta property="og:url" content="http://canghai666x.github.io/2018/11/26/java判断相等/index.html">
+<meta property="og:site_name" content="CangHai&#39;s Blog">
+<meta property="og:description" content="关于java中判断相等的一些思考前两天，一个网友在群里问了一个问题，关于java的String判断相等。举个简单的例子输出结果是falsefalse而使用equals方法来判断结果就是truetrue由此，我们知道，在java中想判断两个字符串的内容是否相同，应该使用String对象的equals方法。但是在这里我们只是知道了How，却不知道Why。我对此有了好奇心，为什么java的String这">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/0063dFB6gy1fxlstcbl72j30gf06hjru.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/0063dFB6gy1fxlss1o40cj30gs06874p.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/0063dFB6gy1fxltq47dkkj30gh0nr757.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/0063dFB6gy1fxltzv0aprj30nj0aldge.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/0063dFB6gy1fxlub2lbrvj308p019q2q.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/0063dFB6gy1fxluesumpaj30iv09ygly.jpg">
+<meta property="og:updated_time" content="2020-09-23T02:42:06.728Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于java中判断相等的一些思考">
+<meta name="twitter:description" content="关于java中判断相等的一些思考前两天，一个网友在群里问了一个问题，关于java的String判断相等。举个简单的例子输出结果是falsefalse而使用equals方法来判断结果就是truetrue由此，我们知道，在java中想判断两个字符串的内容是否相同，应该使用String对象的equals方法。但是在这里我们只是知道了How，却不知道Why。我对此有了好奇心，为什么java的String这">
+<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/0063dFB6gy1fxlstcbl72j30gf06hjru.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://canghai666x.github.io/2018/11/26/java判断相等/"/>
+
+
+
+
+
+  <title>关于java中判断相等的一些思考 | CangHai's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">CangHai's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">沧海的个人博客</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            Commonweal 404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://canghai666x.github.io/2018/11/26/java判断相等/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CangHai">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CangHai's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">关于java中判断相等的一些思考</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-26T00:00:00+08:00">
+                2018-11-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="关于java中判断相等的一些思考"><a href="#关于java中判断相等的一些思考" class="headerlink" title="关于java中判断相等的一些思考"></a>关于java中判断相等的一些思考</h2><p>前两天，一个网友在群里问了一个问题，关于java的String判断相等。<br>举个简单的例子<br><img src="https://ws1.sinaimg.cn/large/0063dFB6gy1fxlstcbl72j30gf06hjru.jpg" alt=""><br>输出结果是<br><strong>false</strong><br><strong>false</strong><br>而使用equals方法来判断<br><img src="https://ws1.sinaimg.cn/large/0063dFB6gy1fxlss1o40cj30gs06874p.jpg" alt=""><br>结果就是<br><strong>true</strong><br><strong>true</strong><br>由此，我们知道，在java中想判断两个字符串的内容是否相同，应该使用String对象的equals方法。<br>但是在这里我们只是知道了<strong>How</strong>，却不知道<strong>Why</strong>。<br>我对此有了好奇心，为什么java的String这么特殊，明明都是“aaa”，用==来判断就是false，用equals来判断就ture呢？</p>
+<h3 id="第一个问题，为啥-不可以判断String是否相等"><a href="#第一个问题，为啥-不可以判断String是否相等" class="headerlink" title="第一个问题，为啥==不可以判断String是否相等"></a>第一个问题，为啥==不可以判断String是否相等</h3><p>想搞明白这个问题，首先就要去找==的实现。<br>==是基础运算符，在jdk中并没有，是由虚拟机实现的。<br>我看了一下The Java® Virtual Machine Specification Java SE 10 Edition，也就是java虚拟机规范。<br>2.2 Data Types中说</p>
+<blockquote>
+<p>he Java Virtual Machine operates on two kinds of types: primitive types and reference types</p>
+</blockquote>
+<p>java虚拟机有两种类型，基础数据类型和引用类型。<br>基础数据类型有8中：byte,short,int,long,char,float,double,boolean.<br>2.4 Reference Types and Values中说</p>
+<blockquote>
+<p>here are three kinds of reference types: class types, array types, and interface types. Their values are references to dynamically created class instances, arrays, or class instances or arrays that implement interfaces, respectively.</p>
+</blockquote>
+<p>引用类型有三种，类类型、数组类型、接口类型，他们的值分别是对类和数组的实例或实现的接口的数组的引用。<br>2.7 Representation of Objects中说</p>
+<blockquote>
+<p>The Java Virtual Machine does not mandate any particular internal structure for objects.<br>In some of Oracle’s implementations of the Java Virtual Machine, a reference to a class instance is a pointer to a handle that is itself a pair of pointers: one to a table containing the methods of the object and a pointer to the Class object that represents the type of the object, and the other to the memory allocated from the heap for the object data.</p>
+</blockquote>
+<p>对象的表示：在oracle虚拟机中，对类实例的引用是指向句柄的指针。<br>现在，我们知道，上面我们创建了两个对象值为“aaa”的字符串，分别交给引用astring和bstring.<br>这两个引用，也就是指针，指向了不同的实例，两个实例存在于堆中。显然两个实例所在的位置不同，地址不同，引用值也不同。<br>在Table 2.11.1-A中有java虚拟机支持的指令集<br><img src="https://ws1.sinaimg.cn/large/0063dFB6gy1fxltq47dkkj30gh0nr757.jpg" alt=""><br>在2.11.3中解释了算术指令</p>
+<blockquote>
+<p>Comparison: dcmpg, dcmpl, fcmpg, fcmpl, lcmp.</p>
+</blockquote>
+<p>比较指令有这些，对比指令集可以看出，reference类型并不支持比较，所以在实际中会将引用类型的值转换为支持比较指令lcmp的long类型比较。</p>
+<p>综上所述，==比较两个对象引用比较的是两个对象在堆中的地址，而不是对象的value，而地址不同，指针值转化为long值比较的结果就是<strong>false</strong>了。</p>
+<h3 id="第二个问题，为啥equals方法可以比较两个String对象的值呢？"><a href="#第二个问题，为啥equals方法可以比较两个String对象的值呢？" class="headerlink" title="第二个问题，为啥equals方法可以比较两个String对象的值呢？"></a>第二个问题，为啥equals方法可以比较两个String对象的值呢？</h3><p>查找到String的源码中的equals方法：<br><img src="https://ws1.sinaimg.cn/large/0063dFB6gy1fxltzv0aprj30nj0aldge.jpg" alt=""><br>如果两个对象是同一个，也就是说引用值相同，直接返回true.<br>不然判断这个对象是否是String的实例，是的话讲目标对象强转为String类型，比较。<br>先判断编码格式，如果是Latin1编码，使用StringLatin1的equals方法比较两个字符串的value,<br>如果是utf16编码,使用StringUTF16的equals比较两个字符串对象的value。<br><img src="https://ws1.sinaimg.cn/large/0063dFB6gy1fxlub2lbrvj308p019q2q.jpg" alt=""><br>value是String对象的一个属性，byte[]类型。<br>String的编码类型：如果String存的全是英文，就用Latin1；如果有中文，就用utf16.<br>我们先看StringLatin1.equals()的实现。<br><img src="https://ws1.sinaimg.cn/large/0063dFB6gy1fxluesumpaj30iv09ygly.jpg" alt=""><br>逐个比较byte[]的每一位，而byte是基础类型，实际上也是添0转long比较，是可以直接比较的。<br>好了，如此将两个String的value属性(byte[]类型)按位比较，是可以正确比较的。</p>
+<p>至于StringUTF16.euqals()的实现，感兴趣的朋友自己去看看吧。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/20/SoftwareEngineering/" rel="next" title="软件工程">
+                <i class="fa fa-chevron-left"></i> 软件工程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/09/SSL实验报告/" rel="prev" title="SSL协议配置及分析">
+                SSL协议配置及分析 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">CangHai</p>
+              <p class="site-description motion-element" itemprop="description">沧海的个人博客，记载我的学习经验</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#关于java中判断相等的一些思考"><span class="nav-number">1.</span> <span class="nav-text">关于java中判断相等的一些思考</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一个问题，为啥-不可以判断String是否相等"><span class="nav-number">1.1.</span> <span class="nav-text">第一个问题，为啥==不可以判断String是否相等</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二个问题，为啥equals方法可以比较两个String对象的值呢？"><span class="nav-number">1.2.</span> <span class="nav-text">第二个问题，为啥equals方法可以比较两个String对象的值呢？</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CangHai</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
